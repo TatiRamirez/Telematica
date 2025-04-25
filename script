@@ -1,0 +1,3 @@
+mkdir prueba
+cd prueba
+echo "Prueba exitosa!" > test
