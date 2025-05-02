@@ -1,4 +1,20 @@
 #!/bin/bash
-mkdir prueba
-cd prueba
-echo "Prueba exitosa!" > test
+echo "FROM python:3.10-slim" > Dockerfile
+echo "WORKDIR /home/app" >> Dockerfile
+echo "COPY server.py ." >> Dockerfile
+echo "FROM python:3" >> Dockerfile
+echo "RUN pip install Flask" >> Dockerfile
+echo "WORKDIR /home/app" >> Dockerfile
+echo "COPY server.py ." >> Dockerfile
+echo "EXPOSE 8080" >> Dockerfile
+echo "CMD python3 /home/app/server.py" >> Dockerfile
+docker build -t sample .
+docker run -t -d -p 8080:8080 --name samrun sample
+
+# Instala las dependencias
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copia el resto del código
+COPY . .
+
+# Comando para ejecutar la app
